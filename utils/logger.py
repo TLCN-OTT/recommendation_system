@@ -1,0 +1,5 @@
+def log(msg):
+    print(f"[INFO] {msg}")
+
+def warn(msg):
+    print(f"[WARN] {msg}")
