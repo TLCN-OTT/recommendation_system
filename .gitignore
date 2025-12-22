@@ -95,6 +95,10 @@ ENV/
 env.bak/
 venv.bak/
 
+# Local files
+*.bat
+prepare-data.py
+
 # Spyder project settings
 .spyderproject
 .spyproject

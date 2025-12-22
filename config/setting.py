@@ -1,4 +1,9 @@
-POSTGRES_URL = "postgresql://postgres:postgres@localhost:5432/postgres"
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+POSTGRES_URL = os.getenv("POSTGRES_URL")
 
 TFIDF_MAX_FEATURES = 1000
 TOP_K_SIMILAR_USERS = 5
