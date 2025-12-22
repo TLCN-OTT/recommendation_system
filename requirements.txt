@@ -8,3 +8,5 @@ python-dotenv
 apscheduler
 httpx
 sqlalchemy
+implicit
+scipy
