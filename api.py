@@ -14,7 +14,7 @@ from utils.logger import log
 
 
 # ================= CONFIG =================
-DATA_TTL = 1 * 60  # 1 phút
+DATA_TTL = 15 * 60 
 # =========================================
 
 
@@ -44,7 +44,7 @@ def load_data():
     global auditlog, content, user_item, R
     global cf_pred, tfidf_mx, sim_mx, item_index, last_loaded
 
-    log("🔄 Reloading data...")
+    log(" Reloading data...")
 
     auditlog = load_auditlog()
     content = load_content()
@@ -72,7 +72,7 @@ def load_data():
     }
 
     last_loaded = time.time()
-    log("✅ Data loaded successfully")
+    log("Data loaded successfully")
 
 
 def ensure_data_loaded():
@@ -116,7 +116,7 @@ def recommend(user_id: str, top_n: int = 10):
         return {"user_id": user_id, "recommendations": result}
 
     except Exception as e:
-        log(f"❌ Recommend error: {e}")
+        log(f" Recommend error: {e}")
         raise HTTPException(
             status_code=500,
             detail="Internal server error"
