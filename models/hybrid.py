@@ -10,8 +10,27 @@ def hybrid_recommend(
     sim_matrix, 
     items_df, 
     item_index, 
-    top_n=10
+    top_n=10,
+    alpha=None,
+    beta=None,
+    gamma=None
 ):
+    """
+    Generate hybrid recommendations combining CF, CB, and Popularity
+    
+    Args:
+        alpha: CF weight (default from config)
+        beta: CB weight (default from config)
+        gamma: Popularity weight (default from config)
+    """
+    # Use config values if not specified
+    if alpha is None:
+        alpha = CF_WEIGHT
+    if beta is None:
+        beta = CB_WEIGHT
+    if gamma is None:
+        gamma = POP_WEIGHT
+    
     seen = set(user_item_df[user_item_df["userId"] == user_id]["itemid"])
     candidates = [i for i in items_df["itemid"] if i not in seen]
     
@@ -42,7 +61,8 @@ def hybrid_recommend(
         
         pop_score = items_df.loc[items_df["itemid"] == item, "pop_score"].values[0]
         
-        score = CF_WEIGHT * cf_score + CB_WEIGHT * cb_score + POP_WEIGHT * pop_score
+        # Use custom weights
+        score = alpha * cf_score + beta * cb_score + gamma * pop_score
         
         recs.append((item, cf_score, cb_score, pop_score, score))
     
